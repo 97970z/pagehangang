@@ -29,7 +29,7 @@ function Navigation() {
             <Nav.Link as={Link} to="/resources">
               자료실
             </Nav.Link>
-            <Nav.Link as={Link} to="/shop">
+            <Nav.Link as={Link} to="/DigitalStreamMap">
               SHOP
             </Nav.Link>
           </Nav>

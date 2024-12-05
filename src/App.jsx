@@ -6,7 +6,7 @@ import About from "./pages/About";
 import Support from "./pages/Support";
 import Participate from "./pages/Participate";
 import Resources from "./pages/Resources";
-import Shop from "./pages/Shop";
+import DigitalStreamMap from "./pages/DigitalStreamMap";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -22,7 +22,7 @@ function App() {
             <Route path="/support" element={<Support />} />
             <Route path="/participate" element={<Participate />} />
             <Route path="/resources" element={<Resources />} />
-            <Route path="/shop" element={<Shop />} />
+            <Route path="/DigitalStreamMap" element={<DigitalStreamMap />} />
           </Routes>
         </main>
         <Footer />
