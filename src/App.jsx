@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Support from "./pages/Support";
+import Activity from "./pages/Activity";
 import Participate from "./pages/Participate";
-import Resources from "./pages/Resources";
+import News from "./pages/News";
+import Support from "./pages/Support";
 import DigitalStreamMap from "./pages/DigitalStreamMap";
 import Footer from "./components/Footer";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -17,12 +18,13 @@ function App() {
         <Navigation />
         <main className="flex-grow-1">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/pagehangang" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/support" element={<Support />} />
+            <Route path="/activity" element={<Activity />} />
             <Route path="/participate" element={<Participate />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/DigitalStreamMap" element={<DigitalStreamMap />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/digitalstreammap" element={<DigitalStreamMap />} />
           </Routes>
         </main>
         <Footer />

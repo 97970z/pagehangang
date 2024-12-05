@@ -1,171 +1,253 @@
-// pages/Support.jsx
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { useState } from "react";
 import {
+  Box,
   Container,
-  Row,
-  Col,
+  Typography,
+  Grid,
   Card,
+  CardContent,
+  CardMedia,
   Button,
-  ProgressBar,
+  Tabs,
   Tab,
-  Nav,
-} from "react-bootstrap";
+  Stack,
+  LinearProgress,
+  Divider,
+  Paper,
+} from "@mui/material";
+import { Favorite, LocalMall, CalendarToday } from "@mui/icons-material";
 
-function Support() {
+const Support = () => {
+  const [tabValue, setTabValue] = useState(0);
+
   return (
-    <>
-      {/* 후원 히어로 섹션 */}
-      <div className="bg-primary text-white py-5">
-        <Container>
-          <Row className="align-items-center">
-            <Col md={7}>
-              <h1>한강의 미래를 함께 만들어주세요</h1>
-              <p className="lead mb-4">
-                여러분의 후원은 한강 생태계 보전을 위한 소중한 씨앗이 됩니다.
-              </p>
-              <Button variant="light" size="lg" className="me-3">
-                정기후원
-              </Button>
-              <Button variant="outline-light" size="lg">
-                일시후원
-              </Button>
-            </Col>
-            <Col md={5}>
-              <Card>
-                <Card.Body>
-                  <h3>현재 진행중인 모금</h3>
-                  <ProgressBar now={60} className="mb-3" />
-                  <p>목표액: 1,000만원 | 현재: 600만원</p>
-                  <Button variant="success" block>
-                    참여하기
-                  </Button>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+    <Box>
+      <Box sx={{ bgcolor: "primary.main", color: "white", py: 6 }}>
+        <Container maxWidth="lg">
+          <Typography variant="h3" gutterBottom fontWeight="bold">
+            후원
+          </Typography>
+          <Typography variant="h6">한강의 미래를 함께 만들어주세요</Typography>
         </Container>
-      </div>
+      </Box>
 
-      {/* 후원 프로그램 탭 */}
-      <Container className="py-5">
-        <Tab.Container defaultActiveKey="regular">
-          <Nav variant="pills" className="mb-4">
-            <Nav.Item>
-              <Nav.Link eventKey="regular">정기후원</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="project">프로젝트 후원</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="corporate">기업후원</Nav.Link>
-            </Nav.Item>
-          </Nav>
+      <Container maxWidth="lg" sx={{ mt: -4, position: "relative", zIndex: 2 }}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Stack direction="row" spacing={2} alignItems="center" mb={3}>
+                <Favorite color="error" sx={{ fontSize: 40 }} />
+                <Box>
+                  <Typography variant="h5" gutterBottom>
+                    현재 진행중인 모금
+                  </Typography>
+                  <Typography variant="body1">
+                    수달 서식지 보호 프로젝트
+                  </Typography>
+                </Box>
+              </Stack>
+              <LinearProgress
+                variant="determinate"
+                value={75}
+                sx={{ height: 10, borderRadius: 5, mb: 2 }}
+              />
+              <Stack direction="row" justifyContent="space-between" mb={3}>
+                <Typography>목표액: 1,000만원</Typography>
+                <Typography>달성액: 750만원 (75%)</Typography>
+              </Stack>
+              <Button variant="contained" color="primary" size="large">
+                지금 후원하기
+              </Button>
+            </Paper>
+          </Grid>
 
-          <Tab.Content>
-            <Tab.Pane eventKey="regular">
-              <Row>
-                {[10000, 30000, 50000].map((amount) => (
-                  <Col md={4} key={amount} className="mb-4">
-                    <Card className="text-center">
-                      <Card.Body>
-                        <h3>{amount.toLocaleString()}원</h3>
-                        <p>매월 {amount / 10000}만원씩 후원하기</p>
-                        <ul className="list-unstyled">
-                          <li>✓ 뉴스레터 구독</li>
-                          <li>✓ 연간보고서 제공</li>
-                          <li>✓ 후원자 모임 초대</li>
-                        </ul>
-                        <Button variant="primary">후원하기</Button>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Tab.Pane>
-
-            <Tab.Pane eventKey="project">
-              <Row>
-                {[1, 2, 3].map((item) => (
-                  <Col md={4} key={item} className="mb-4">
-                    <Card>
-                      <Card.Img
-                        variant="top"
-                        src={`/path-to-project-${item}.jpg`}
-                      />
-                      <Card.Body>
-                        <Card.Title>수달 서식지 보호 프로젝트</Card.Title>
-                        <ProgressBar now={75} className="mb-3" />
-                        <p>목표액: 500만원 | 현재: 375만원</p>
-                        <Button variant="primary">후원하기</Button>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Tab.Pane>
-
-            <Tab.Pane eventKey="corporate">
-              <Row>
-                <Col md={6}>
-                  <h3>기업후원 프로그램</h3>
-                  <p>기업의 사회적 책임을 실천하고 ESG 가치를 높이세요.</p>
-                  <ul className="list-unstyled">
-                    <li className="mb-3">✓ 맞춤형 ESG 프로그램</li>
-                    <li className="mb-3">✓ 임직원 참여 프로그램</li>
-                    <li className="mb-3">✓ 기업 후원 성과 보고</li>
-                  </ul>
-                  <Button variant="primary">상담 신청</Button>
-                </Col>
-                <Col md={6}>
-                  <img
-                    src="/path-to-corporate.jpg"
-                    alt="기업후원"
-                    className="img-fluid rounded"
-                  />
-                </Col>
-              </Row>
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Typography variant="h6" gutterBottom>
+                후원자 현황
+              </Typography>
+              <Typography variant="h3" color="primary" gutterBottom>
+                1,234명
+              </Typography>
+              <Typography color="text.secondary">함께하는 한강애인</Typography>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
 
-      {/* 후원자 명단 */}
-      <div className="bg-light py-5">
-        <Container>
-          <h2 className="mb-4">함께하는 후원자님</h2>
-          <Row>
-            <Col md={8}>
-              <Card>
-                <Card.Body>
-                  <div className="d-flex flex-wrap">
-                    {Array(20)
-                      .fill()
-                      .map((_, i) => (
-                        <span key={i} className="badge bg-primary m-1">
-                          김*철
-                        </span>
-                      ))}
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={4}>
-              <Card>
-                <Card.Body>
-                  <h4>후원자 혜택</h4>
-                  <ul className="list-unstyled">
-                    <li className="mb-2">✓ 정기 뉴스레터</li>
-                    <li className="mb-2">✓ 후원자 명단 등재</li>
-                    <li className="mb-2">✓ 연간 활동보고서</li>
-                    <li className="mb-2">✓ 기부금 영수증</li>
-                  </ul>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+      <Container maxWidth="lg" sx={{ mt: 6 }}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={tabValue}
+            onChange={(e, newValue) => setTabValue(newValue)}
+          >
+            <Tab label="한강애인" icon={<Favorite />} />
+            <Tab label="한강굿즈" icon={<LocalMall />} />
+          </Tabs>
+        </Box>
+
+        <Box sx={{ py: 4 }}>
+          <TabPanel value={tabValue} index={0}>
+            <Grid container spacing={3}>
+              {supporterPlans.map((plan, index) => (
+                <Grid item xs={12} md={4} key={index}>
+                  <Card sx={{ height: "100%" }}>
+                    <CardContent>
+                      <Typography variant="h5" color="primary" gutterBottom>
+                        {plan.title}
+                      </Typography>
+                      <Typography variant="h4" gutterBottom>
+                        {plan.amount}원
+                      </Typography>
+                      <Typography color="text.secondary" paragraph>
+                        {plan.description}
+                      </Typography>
+                      <Divider sx={{ my: 2 }} />
+                      <Stack spacing={1}>
+                        {plan.benefits.map((benefit, idx) => (
+                          <Typography key={idx} variant="body2">
+                            ✓ {benefit}
+                          </Typography>
+                        ))}
+                      </Stack>
+                      <Button variant="contained" fullWidth sx={{ mt: 3 }}>
+                        후원하기
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </TabPanel>
+
+          <TabPanel value={tabValue} index={1}>
+            <Grid container spacing={3}>
+              {goods.map((item, index) => (
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <Card>
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={`/api/placeholder/400/200`}
+                      alt={item.name}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h6">
+                        {item.name}
+                      </Typography>
+                      <Typography variant="h6" color="primary" gutterBottom>
+                        {item.price}원
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        {item.description}
+                      </Typography>
+                      <Button variant="outlined" fullWidth sx={{ mt: 2 }}>
+                        구매하기
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </TabPanel>
+        </Box>
+      </Container>
+
+      <Box sx={{ bgcolor: "grey.100", py: 6, mt: 6 }}>
+        <Container maxWidth="lg">
+          <Typography variant="h5" gutterBottom textAlign="center">
+            후원금은 이렇게 사용됩니다
+          </Typography>
+          <Grid container spacing={3} sx={{ mt: 2 }}>
+            {usageCategories.map((category, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <Paper sx={{ p: 3, textAlign: "center" }}>
+                  {category.icon}
+                  <Typography variant="h6" sx={{ mt: 2 }}>
+                    {category.title}
+                  </Typography>
+                  <Typography color="text.secondary">
+                    {category.percentage}%
+                  </Typography>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
-      </div>
-    </>
+      </Box>
+    </Box>
+  );
+};
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`support-tabpanel-${index}`}
+      {...other}
+    >
+      {value === index && <Box>{children}</Box>}
+    </div>
   );
 }
+
+const supporterPlans = [
+  {
+    title: "조합원",
+    amount: "10,000",
+    description: "매월 만원으로 한강의 미래를 만듭니다",
+    benefits: ["정기 뉴스레터 구독", "연간 활동보고서", "기부금 영수증 발행"],
+  },
+];
+
+const goods = [
+  {
+    name: "한강 에코백",
+    price: "25,000",
+    description: "100% 유기농 면으로 제작된 에코백",
+  },
+  {
+    name: "수달 텀블러",
+    price: "35,000",
+    description: "친환경 스테인리스 텀블러",
+  },
+  {
+    name: "한강 노트",
+    price: "15,000",
+    description: "재생지로 만든 친환경 노트",
+  },
+  {
+    name: "새 엽서세트",
+    price: "10,000",
+    description: "한강의 조류 사진 엽서 5종",
+  },
+];
+
+const usageCategories = [
+  {
+    title: "생태보전",
+    percentage: 40,
+    icon: "🌱",
+  },
+  {
+    title: "교육연구",
+    percentage: 30,
+    icon: "📚",
+  },
+  {
+    title: "시민활동",
+    percentage: 20,
+    icon: "👥",
+  },
+  {
+    title: "운영비",
+    percentage: 10,
+    icon: "💡",
+  },
+];
 
 export default Support;

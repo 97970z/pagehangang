@@ -1,48 +1,133 @@
-// components/Navigation.jsx
-import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react";
+import {
+  AppBar,
+  Toolbar,
+  Container,
+  Button,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link, useLocation } from "react-router-dom";
 
-function Navigation() {
-  return (
-    <Navbar bg="light" expand="lg" sticky="top">
-      <Container>
-        <Navbar.Brand as={Link} to="/">
-          <img
-            src="/path-to-logo.png"
-            alt="한강조합 로고"
-            height="30"
-            className="d-inline-block align-top"
-          />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link as={Link} to="/about">
-              소개
-            </Nav.Link>
-            <Nav.Link as={Link} to="/support">
-              후원
-            </Nav.Link>
-            <Nav.Link as={Link} to="/participate">
-              참여
-            </Nav.Link>
-            <Nav.Link as={Link} to="/resources">
-              자료실
-            </Nav.Link>
-            <Nav.Link as={Link} to="/DigitalStreamMap">
-              SHOP
-            </Nav.Link>
-          </Nav>
-          <Nav>
-            <Button variant="outline-primary" className="me-2">
-              로그인
-            </Button>
-            <Button variant="primary">후원하기</Button>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+const Navigation = () => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const location = useLocation();
+
+  const menuItems = [
+    { text: "소개", path: "/about" },
+    { text: "활동", path: "/activity" },
+    { text: "참여", path: "/participate" },
+    { text: "소식", path: "/news" },
+    { text: "후원", path: "/support" },
+    { text: "디지털샛강지도", path: "/digitalstreammap" },
+  ];
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <List>
+      {menuItems.map((item) => (
+        <ListItem
+          button
+          key={item.text}
+          component={Link}
+          to={item.path}
+          selected={location.pathname === item.path}
+        >
+          <ListItemText primary={item.text} />
+        </ListItem>
+      ))}
+    </List>
   );
-}
+
+  return (
+    <AppBar position="sticky" color="default" elevation={1}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters>
+          <Button
+            component={Link}
+            to="/pagehangang"
+            sx={{
+              mr: 4,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              component="img"
+              src="logo.png"
+              alt="한강조합 로고"
+              sx={{ height: 40 }}
+            />
+          </Button>
+
+          {isMobile ? (
+            <>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ ml: "auto" }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                variant="temporary"
+                anchor="right"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{ keepMounted: true }}
+              >
+                {drawer}
+              </Drawer>
+            </>
+          ) : (
+            <>
+              <Box sx={{ flexGrow: 1, display: "flex", gap: 2 }}>
+                {menuItems.map((item) => (
+                  <Button
+                    key={item.text}
+                    component={Link}
+                    to={item.path}
+                    color={
+                      location.pathname === item.path ? "primary" : "inherit"
+                    }
+                    sx={{
+                      fontWeight:
+                        location.pathname === item.path ? "bold" : "normal",
+                      "&:hover": { color: "primary.main" },
+                    }}
+                  >
+                    {item.text}
+                  </Button>
+                ))}
+              </Box>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                to="/support"
+              >
+                후원하기
+              </Button>
+            </>
+          )}
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
 
 export default Navigation;

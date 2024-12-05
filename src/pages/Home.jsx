@@ -1,153 +1,215 @@
-// pages/Home.jsx
-import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Paper,
+  Divider,
+  Stack,
+} from "@mui/material";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
+import ParkIcon from "@mui/icons-material/Park";
+import GroupsIcon from "@mui/icons-material/Groups";
 
-function Home() {
+const Home = () => {
   return (
-    <>
-      {/* 상단 알림바 */}
-      <Alert variant="info" className="mb-0">
-        🌿 현재 진행 중인 긴급 모금: 수달 서식지 보호 프로젝트
-      </Alert>
-
-      {/* 히어로 섹션 */}
-      <div className="bg-primary text-white py-5">
-        <Container>
-          <Row className="align-items-center">
-            <Col md={6}>
-              <h1>함께 가꾸는 우리의 한강</h1>
-              <p className="lead">시민과 함께 만드는 건강한 생태계</p>
-              <Button variant="light" size="lg">
-                참여하기
-              </Button>
-            </Col>
-            <Col md={6}>
-              <img
-                src="/path-to-hero-image.jpg"
-                alt="한강 전경"
-                className="img-fluid rounded"
-              />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-
-      {/* 실시간 생태 현황 */}
-      <Container className="py-5">
-        <h2 className="mb-4">실시간 한강 소식</h2>
-        <Row>
-          <Col md={4}>
-            <Card className="mb-3">
-              <Card.Body>
-                <h5>🦦 오늘의 수달</h5>
-                <p>최근 목격: 2시간 전 여의도 구간</p>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="mb-3">
-              <Card.Body>
-                <h5>🌡️ 현재 환경</h5>
-                <p>수온: 18°C | 대기: 22°C</p>
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col md={4}>
-            <Card className="mb-3">
-              <Card.Body>
-                <h5>🦅 철새 소식</h5>
-                <p>현재 관찰된 종: 15종</p>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-
-      {/* 오늘의 프로그램 */}
-      <div className="bg-light py-5">
-        <Container>
-          <h2 className="mb-4">오늘의 프로그램</h2>
-          <Row>
-            {[1, 2, 3].map((item) => (
-              <Col md={4} key={item}>
-                <Card className="mb-3">
-                  <Card.Img
-                    variant="top"
-                    src={`/path-to-program-${item}.jpg`}
-                  />
-                  <Card.Body>
-                    <Card.Title>생태 탐방 프로그램</Card.Title>
-                    <Card.Text>
-                      시간: 14:00 ~ 16:00
-                      <br />
-                      잔여: 5자리
-                    </Card.Text>
-                    <Button variant="outline-primary">신청하기</Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </div>
-
-      {/* 후원 & 파트너 섹션 */}
-      <Container className="py-5">
-        <Row>
-          <Col md={6}>
-            <h2>후원 현황</h2>
-            <div className="progress mb-3">
-              <div
-                className="progress-bar"
-                role="progressbar"
-                style={{ width: "75%" }}
-                aria-valuenow={75}
-                aria-valuemin={0}
-                aria-valuemax={100}
+    <Box>
+      {/* Hero Section */}
+      <Box
+        sx={{
+          position: "relative",
+          height: "80vh",
+          display: "flex",
+          alignItems: "center",
+          bgcolor: "primary.main",
+          color: "white",
+          overflow: "hidden",
+        }}
+      >
+        <Box
+          component="img"
+          src="/api/placeholder/1920/1080"
+          alt="한강 전경"
+          sx={{
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            opacity: 0.6,
+          }}
+        />
+        <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+          <Box maxWidth="600px">
+            <Typography
+              variant="h2"
+              component="h1"
+              gutterBottom
+              fontWeight="bold"
+            >
+              함께 만드는 우리의 한강
+            </Typography>
+            <Typography variant="h5" paragraph sx={{ mb: 4 }}>
+              시민과 함께 한강의 생태계를 보전하고 지속가능한 미래를 만듭니다
+            </Typography>
+            <Stack direction="row" spacing={2}>
+              <Button
+                variant="contained"
+                color="secondary"
+                size="large"
+                endIcon={<ArrowForwardIcon />}
               >
-                75%
-              </div>
-            </div>
-            <p>목표액: 1,000만원 | 현재: 750만원</p>
-            <Button variant="success">지금 후원하기</Button>
-          </Col>
-          <Col md={6}>
-            <h2>함께하는 기업</h2>
-            <Row>
-              {[1, 2, 3, 4].map((item) => (
-                <Col xs={6} key={item}>
-                  <img
-                    src={`/path-to-partner-${item}.jpg`}
-                    alt={`파트너사 ${item}`}
-                    className="img-fluid p-3"
-                  />
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
+                활동 참여하기
+              </Button>
+              <Button variant="outlined" color="inherit" size="large">
+                후원하기
+              </Button>
+            </Stack>
+          </Box>
+        </Container>
+      </Box>
+
+      {/* Status Cards */}
+      <Container
+        maxWidth="lg"
+        sx={{ mt: -5, mb: 8, position: "relative", zIndex: 2 }}
+      >
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Stack direction="row" spacing={2} alignItems="center" mb={2}>
+                <WaterDropIcon color="primary" />
+                <Typography variant="h6">오늘의 한강</Typography>
+              </Stack>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Typography color="text.secondary">수온</Typography>
+                  <Typography variant="h4">18.5°C</Typography>
+                </Grid>
+                <Grid item xs={6}>
+                  <Typography color="text.secondary">수질등급</Typography>
+                  <Typography variant="h4">Ib</Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Stack direction="row" spacing={2} alignItems="center" mb={2}>
+                <ParkIcon color="primary" />
+                <Typography variant="h6">생태 현황</Typography>
+              </Stack>
+              <Stack spacing={1}>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography>관찰된 조류</Typography>
+                  <Typography fontWeight="bold">15종</Typography>
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography>수달 목격</Typography>
+                  <Typography fontWeight="bold">2시간 전</Typography>
+                </Box>
+              </Stack>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={3} sx={{ p: 3 }}>
+              <Stack direction="row" spacing={2} alignItems="center" mb={2}>
+                <GroupsIcon color="primary" />
+                <Typography variant="h6">참여 현황</Typography>
+              </Stack>
+              <Stack spacing={1}>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography>이번 달 프로그램</Typography>
+                  <Typography fontWeight="bold">23개</Typography>
+                </Box>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography>참여 시민</Typography>
+                  <Typography fontWeight="bold">456명</Typography>
+                </Box>
+              </Stack>
+            </Paper>
+          </Grid>
+        </Grid>
       </Container>
 
-      {/* 뉴스레터 구독 */}
-      <div className="bg-secondary text-white py-5">
-        <Container>
-          <Row className="justify-content-center text-center">
-            <Col md={6}>
-              <h2>뉴스레터 구독</h2>
-              <p>한강의 소식을 매주 받아보세요</p>
-              <div className="input-group mb-3">
-                <input
-                  type="email"
-                  className="form-control"
-                  placeholder="이메일 주소"
+      {/* Activities Section */}
+      <Container maxWidth="lg" sx={{ mb: 8 }}>
+        <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
+          주요 활동
+        </Typography>
+        <Divider sx={{ mb: 4 }} />
+        <Grid container spacing={3}>
+          {activities.map((activity, index) => (
+            <Grid item xs={12} md={4} key={index}>
+              <Card sx={{ height: "100%" }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={`/api/placeholder/400/200`}
+                  alt={activity.title}
                 />
-                <Button variant="primary">구독하기</Button>
-              </div>
-            </Col>
-          </Row>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="h3">
+                    {activity.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {activity.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
+      {/* Impact Numbers */}
+      <Box sx={{ bgcolor: "primary.main", color: "white", py: 8 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4} textAlign="center">
+            {impactNumbers.map((item, index) => (
+              <Grid item xs={6} md={3} key={index}>
+                <Typography variant="h3" component="div" fontWeight="bold">
+                  {item.number}
+                </Typography>
+                <Typography variant="subtitle1" sx={{ opacity: 0.8 }}>
+                  {item.label}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
-      </div>
-    </>
+      </Box>
+    </Box>
   );
-}
+};
+
+const activities = [
+  {
+    title: "샛숲학교",
+    description:
+      "어린이들을 위한 생태교육 프로그램을 운영하며, 미래 세대의 환경 의식을 높입니다.",
+  },
+  {
+    title: "생태모니터링",
+    description:
+      "시민과 전문가가 함께 참여하여 한강의 생태계 변화를 관찰하고 기록합니다.",
+  },
+  {
+    title: "환경보전활동",
+    description:
+      "한강의 생태계 보전을 위한 다양한 실천 활동을 시민들과 함께 진행합니다.",
+  },
+];
+
+const impactNumbers = [
+  { number: "15,000+", label: "연간 참여 시민" },
+  { number: "200+", label: "생태 프로그램" },
+  { number: "3,000+", label: "정기후원자" },
+  { number: "50+", label: "협력기관" },
+];
 
 export default Home;
