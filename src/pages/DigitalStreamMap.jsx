@@ -133,7 +133,7 @@ const DigitalStreamMap = () => {
             borderRadius: 2,
           }}
         >
-          {/* 탭 & 범례 */}
+          {/* 탭 */}
           <Stack
             direction="row"
             justifyContent="space-between"
@@ -164,29 +164,6 @@ const DigitalStreamMap = () => {
                 />
               ))}
             </Tabs>
-            <Stack
-              direction="row"
-              spacing={1}
-              px={3}
-              sx={{ overflowX: "auto", flexWrap: "nowrap" }}
-            >
-              {mapTypes[activeTab].legend.map((item, i) => (
-                <Chip
-                  key={i}
-                  label={item.label}
-                  size="small"
-                  sx={{
-                    bgcolor: item.color,
-                    color: "white",
-                    "& .MuiChip-label": {
-                      px: 2,
-                      textShadow: "0px 0px 4px rgba(0,0,0,0.5)",
-                      fontWeight: "medium",
-                    },
-                  }}
-                />
-              ))}
-            </Stack>
           </Stack>
 
           {/* 지도 */}
